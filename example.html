@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Pure-Sticky Example</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width">
+	
+	<script id="pure-sticky" src="pure-sticky.js" type="text/javascript" defer></script>
+
+	<script id="main">
+	window.addEventListener("DOMContentLoaded", function() {
+	    pureSticky('nav',0);
+	    pureSticky('#sticky-header-1', 52);
+	    pureSticky('#sticky-section h3', 70);
+	    pureSticky('#problem-sticky-1', 52);
+	});
+	
+	// For those that are using jQuery
+	/*
+	   $(document).ready(function() {
+	       pureSticky('nav',0);
+	   });
+	*/
+	</script>
+
+	<style>
+	* {
+	    color: #4C4C4C;
+	    font-size: 12px;
+	}
+	html,body,div,span,h1,h2,h3,p,pre,a,code,del, dfn, em, img, ins, kbd, q, s, samp,strike,strong,sub,sup,b, u, i, ol, ul, li,article,footer, header,nav,section {
+	    margin: 0;
+	    border: 0;
+	    padding: 0;
+	    font-size: 100%;
+	}
+	html {
+	    font-size: 100.01%;
+	}
+	body {
+	    overflow-x: hidden;
+	}
+	body {
+	    background-color: #eee;
+	}
+	a, a:link {
+	    color: #4DABD1;
+	    text-decoration: underline;
+	}
+	a:visited {
+	    color: #6D4084;
+	}
+	h1 {
+	    font-size: 4.0em;
+	    font-weight: 200;
+	}
+	h2 {
+	    font-size: 3.0em;
+	    font-weight: 400;
+	}
+	h2 {
+	    background-color: #eee;
+	}
+	h3 {
+	    font-size: 2.6em;
+	    font-weight: 400;
+	}
+	h4 {
+	    font-size: 2.2em;
+	    font-weight: 400;
+	}
+	li, ul {
+	    display: inline-block;
+	    list-style: none;
+	    text-decoration: none;
+	}
+	p {
+	    display: inline-block;
+	    box-sizing: border-box;
+	    border: 12px solid transparent;
+	}
+	pre {
+	    font-size: 12px;
+	}
+	.container {
+	    margin: 0 auto;
+	    max-width: 1000px;
+	    width: 90%;
+	    box-sizing: border-box;
+	}
+	header {
+	    padding: 6vh 0;
+	    background-color: #6D4084;
+	    text-align: center;
+	}
+	header h1 {
+	    font-size: 3.4em;
+	    font-weight: 400;
+	    color: #eee;
+	}
+	footer {
+	    padding: 2vh 0;
+	    background-color: #6D4084;
+	}
+	footer p {
+	    width: 100%;
+	    color: #fff;
+	    text-align: right;
+	}
+	nav {
+	    border-top: 4px solid #6D4084;
+	    border-bottom: 1px solid #ccc;
+	    background-color: #fff;
+	}
+	nav * {
+	    font-size: 18px;
+	}
+	#nav-wrap {
+	    display: block;
+	}
+	#nav-wrap li {
+	    position: relative;
+	    padding: 12px 8px;
+	}
+	#nav-wrap li > ul {
+	    display: none;
+	    position: absolute;
+	    border: 1px solid #ccc;
+	    background-color: #fff;
+	}
+	.sub {
+	    top: 100%;
+	    left: 0;
+	}
+	.subsub {
+	    top: -1px;
+	    left: 100%;
+	}
+	#nav-wrap li > ul > li {
+	    padding: 12px;
+	    min-width: 140px;
+	}
+	#nav-wrap li:hover {
+	    background-color: #555;
+	}
+	#nav-wrap li:hover > ul {
+	    display: inline-block;
+	    border: 1px solid #777;
+	    background-color: #444;
+	}
+	#nav-wrap ul:hover {
+	    display: inline-block;
+	}
+	#nav-wrap li:hover,
+	#nav-wrap li:hover > a,
+	#nav-wrap li:hover > ul > li > a {
+	    color: #fff;
+	}
+	#nav-wrap a {
+	    color: #333;
+	}
+	#nav-wrap a,
+	#nav-wrap a:visited {
+	    text-decoration: none;
+	}	
+	#main {
+	    min-height: 100vh;
+	}
+	#sticky-section h3 {
+	    border-top: 1px solid #333;
+	}
+	</style>
+    </head>
+    <body>
+	<div id="wrap">
+
+	    <header>
+		<div class="container">
+		    <h1>Testing out Pure-Sticky.js</h1>
+		</div>
+	    </header>
+	    
+	    <nav>
+		<div id="nav-wrap" class="container">
+		    <ul>
+			<li>Hello</li>
+			<li>there</li>
+		    </ul>
+		</div>
+	    </nav>
+	
+	    <article id="main">
+		<section class="container">
+		    <h2 id="sticky-header-1">Sticky Header 1</h2>
+		    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+		    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+		</section>
+
+		<section id="sticky-section" class="container">
+		    <h3>Sticky Header 2</h3>
+		    <p>Make sure to set a background colour/image if you don't want objects visible when scrolling.</p>
+		    
+		    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+		</section>
+
+		<section class="container">
+		    <h4 id="problem-sticky-1" style="margin-top:40px">Problem Sticky 1</h4>
+		    <p>Make sure that the desired element doesn't have any margin on top. It won't be in the position where you expect it. Will look into fixing this.</p>
+
+		    <p>Etiam vel lectus luctus, porttitor massa non, malesuada urna. Etiam eu felis sit amet neque accumsan lobortis vel ac leo. Nullam faucibus ante nibh, sit amet iaculis augue interdum sit amet. Vivamus odio sem, rhoncus eu nisl vel, elementum maximus tellus. In ut nisi venenatis, laoreet nunc in, interdum lorem. Fusce at mi semper, interdum odio aliquam, varius lorem. Praesent sagittis nisl massa, in venenatis dui efficitur ac. Quisque ultrices faucibus dapibus. </p>
+		</section>
+		
+		<section class="container" style="margin-top:100px">
+		    <h2>The code:</h2>
+		    <pre>
+		    /**
+		     * pure-sticky.js
+		     * Author: Jared Smith
+		     * Github: @jrods
+		     * 
+		     * This file is licensed under MPL v2.0. See LICENSE file for details.
+		     * 
+		     */
+
+		    function pureSticky(elementQuery, position) {
+			"use strict";
+
+			var element           = document.querySelector(elementQuery);
+			var elementNodeParent = element.parentNode;
+			var posElement        = element.getBoundingClientRect();
+			var elementHeight     = posElement.bottom - posElement.top;
+
+			var posParent, posShim;
+
+			var shim          = document.createElement('div');
+			shim.style.height = elementHeight + 'px';
+
+			var makeSticky = (function (set) {
+			    if (set) {
+				elementNodeParent.insertBefore(shim, element);
+				element.style.position = 'fixed';
+				element.style.top      = position + 'px';
+				element.style.width    = '100%';
+				element.style.zIndex   = '10000';
+			    } else {
+				elementNodeParent.removeChild(shim);
+				element.removeAttribute("style");
+			    }
+			});
+
+			var updateElementPositions = (function () {
+			    posElement = element.getBoundingClientRect();
+			    posShim    = shim.getBoundingClientRect();
+			    posParent  = element.parentElement.getBoundingClientRect();
+			});
+
+			var setSticky = (function () {
+			    // the reason for not using an if () {} else {} when checking for fixed position
+			    // is the first if statement (element.style.position != 'fixed') doesn't check for correct 
+			    // positioning like it would when the sticky element is fixed (if that makes any sense)
+				// this way will allow a check when not fixed and fixed in the same function call
+			    updateElementPositions();
+
+			    if (element.style.position != 'fixed') {
+				if (posElement.top <= position) {
+				    makeSticky(true);				
+				}
+
+				return;
+			    } 
+
+			    if (element.style.position == 'fixed') {
+				if (posShim.top >= posElement.top) {
+				    makeSticky(false);
+				    return;
+				}
+
+				if (posParent.bottom >= position) {
+				    element.style.top    = position + 'px';
+				    element.style.zIndex = '10000';
+				}
+				
+				if (posParent.bottom <= position + elementHeight) {
+				    // happens when the sticky element has reached its parent's 
+				    // bottom position, sticky element will now appear it's being carried
+				    var newPosition = posParent.bottom - elementHeight;
+
+				    if (posElement.bottom <= 0) {
+					// stops the element from updating it's position, for optimization
+					if (posParent.bottom >= posElement.top) {
+					    // condition happens when scrolling down and sticky element
+					    // will be coming into the viewport	
+					    element.style.top    = newPosition + 'px';
+					    element.style.zIndex = null;						
+					}
+					
+					return;
+				    }
+
+				    element.style.top    = newPosition + 'px';
+				    element.style.zIndex = null;				
+				}
+			    }
+			});
+
+			setSticky();
+
+			window.addEventListener('scroll', setSticky, true);
+		    };
+		    </pre>
+		</section>
+	    </article>
+		
+	    <footer>
+		<p>Something's a foot</p>
+	    </footer>
+	</div>
+    </body>
+</html>
