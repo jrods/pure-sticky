@@ -1,12 +1,13 @@
 /**
- * pure-sticky.js
+ * pure-sitcky.js
+ * Version: 1
  * Author: Jared Smith <jared.smith.jrod@gmail.com> 
  * Github: @jrods
- * 
- * This file is licensed under MPL v2.0. See LICENSE file for details.
- * 
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. 
  */
-
 function pureSticky(elementQuery, position) {
 	"use strict";
 
@@ -44,8 +45,6 @@ function pureSticky(elementQuery, position) {
 		// is the first if statement (element.style.position != 'fixed') doesn't check for correct 
 		// positioning like it would when the sticky element is fixed (if that makes any sense)
 		// this way will allow a check when not fixed and fixed in the same function call
-		
-
 		if (element.style.position != 'fixed') {
 			updateElementPositions();
 			if (posElement.top <= position) {

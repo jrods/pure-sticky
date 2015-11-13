@@ -1,19 +1,18 @@
-#+Title: Pure-Sticky.js
 #+Author: Jared Smith
 #+Email: jared.smith.jrod@gmail.com
 
 * About
-Pure-Sticky.js is a pure js implementation of the sticky position in CSS. There are zero dependences needed to use Pure-Sticky.js. 
+Pure-Sticky.js is a pure js implementation of the sticky position in CSS. There are zero dependencies needed to use Pure-Sticky.js. 
 
 * Why?
 Mainly because the blink engine (chrome) doesn't support position: sticky (CSS) out of the box yet. Also, for practice with js.
 
 * How?
-[[temp][Future spot for example page]]
+[[https://jrods.github.io/pure-sticky][Future spot for example page]]
 
-Before calling the inital function, make sure all of the DOM is ready, see [[example.html][the example for reference]]. 
+Before calling the initial function, make sure all of the DOM is ready, see [[example.html][the example source for reference]]. 
 
-For Pure-Sticky to work, the inital function only requires 2 arguments: the element and the position. The element parameter is expecting a string. Make sure for the element that the stringy is an unique id. The position parameter is expecting a int or float, from there the value will be treated as pixels. That's it.
+For Pure-Sticky to work, the initial function only requires 2 arguments: the element and the position. The element parameter is expecting a string. Make sure for the element that the stringy is an unique id. The position parameter is expecting a int or float, from there the value will be treated as pixels. That's it.
 
 * Support
 Browsers tested in:
@@ -23,3 +22,7 @@ Browsers tested in:
 - Midori
 
 As for IE and Edge, I don't really develop in Windows, so I haven't taken the time to see what versions work.
+
+* Contributors
+OG: Jared Smith <jared.smith.jrod@gmail.com> @jrods
+
