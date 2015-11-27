@@ -3,91 +3,135 @@
  * Version: 1
  * Author: Jared Smith <jared.smith.jrod@gmail.com> 
  * Github: @jrods
+ * Home: https://gihtub.com/jrods/pure-sticky
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. 
  */
-function pureSticky(elementQuery, position) {
-	"use strict";
+function PureSticky(autoStart) { //fuck you chrome not having default params in func args
+    // TODO: check browser compatibility
+    
+    var allElements = new Array();
 
-	var element           = document.querySelector(elementQuery);
-	var elementNodeParent = element.parentNode;
-	var posElement        = element.getBoundingClientRect();
-	var elementHeight     = posElement.bottom - posElement.top;
+    /* Private
+     *****************************/
+    var elementID = function(element) {
+	if( !(element instanceof HTMLElement) )
+	    return undefined;
+	
+	var tag       = element.localName.toString();
+	var id        = (element.id ? "#" + element.id.toString() : "");
+	var className = (element.className ? "." + element.className.replace(/ /g, ".").toString() : "");
+	
+	return tag + id + className;
+    };
 
-	var posParent, posShim;
+    var makeSticky = function(sticky) {
+	sticky.e.parentNode.insertBefore(sticky.shim, sticky.e);
+	sticky.e.style.position = 'fixed';
+	sticky.e.style.top      = sticky.position + 'px';
+	sticky.e.style.width    = '100%';
+	sticky.e.style.zIndex   = '10000';
+    };
 
-	var shim          = document.createElement('div');
-	shim.style.height = elementHeight + 'px';
+    var makeUnSticky = function(sticky) {
+	sticky.e.parentNode.removeChild(sticky.shim);
+	sticky.e.removeAttribute("style");
+    };
+    
+    var makeShim = function(height) {
+	var shim = document.createElement('div');
+	shim.style.height = height + 'px';
+	
+	return shim;
+    };
 
-	var makeSticky = (function (set) {
-		if (set) {
-			elementNodeParent.insertBefore(shim, element);
-			element.style.position = 'fixed';
-			element.style.top      = position + 'px';
-			element.style.width    = '100%';
-			element.style.zIndex   = '10000';
-		} else {
-			elementNodeParent.removeChild(shim);
-			element.removeAttribute("style");
+    /* Public
+     *****************************/    
+    this.startSticky = function() {
+	return window.addEventListener('scroll', this.setSticky, false);
+    };
+    
+    this.stopSticky = function() {
+	return window.removeEventListener('scroll', this.setSticky, false);
+    };
+
+    this.getAllElements = function() {
+	return allElements;
+    };
+    
+    this.add = function(elementQuery, position) {
+	var getElement = document.querySelector(elementQuery);
+	var getElementPos = getElement.getBoundingClientRect();
+	var sticky = {
+	    id: elementID(getElement),
+	    e: getElement,
+	    position: position,
+	    shim: makeShim(getElementPos.height)
+	};
+	
+	if (!sticky.id)
+	    return false;
+	
+	allElements.push(sticky);
+	return true;
+    };
+
+    this.remove = function(elementQuery) {
+	
+    };
+
+    this.setSticky = function() {
+	var posElement, posParent, posShim;
+	
+	var updateElementPositions = function(sticky) {
+	    posElement = sticky.e.getBoundingClientRect();
+	    posParent = sticky.e.parentElement.getBoundingClientRect();
+	    posShim = sticky.shim.getBoundingClientRect();
+	};
+	
+	allElements.map(function(sticky) {
+
+	    if (sticky.e.style.position != 'fixed') {
+		updateElementPositions(sticky);
+		if (posElement.top <= sticky.position) {
+		    makeSticky(sticky);
 		}
-	});
-
-	var updateElementPositions = (function () {
-		posElement = element.getBoundingClientRect();
-		posShim    = shim.getBoundingClientRect();
-		posParent  = element.parentElement.getBoundingClientRect();
-	});
-
-	var setSticky = (function () {
-		// the reason for not using an if () {} else {} when checking for fixed position
-		// is the first if statement (element.style.position != 'fixed') doesn't check for correct 
-		// positioning like it would when the sticky element is fixed (if that makes any sense)
-		// this way will allow a check when not fixed and fixed in the same function call
-		if (element.style.position != 'fixed') {
-			updateElementPositions();
-			if (posElement.top <= position) {
-				makeSticky(true);
-			}
-		} 
-
-		if (element.style.position == 'fixed') {
-			updateElementPositions();
-			if (posShim.top >= posElement.top) {
-				makeSticky(false);
-				return;
-			}
-
-			if (posParent.bottom >= position) {
-				element.style.top    = position + 'px';
-				element.style.zIndex = '10000';
+	    } 
+	    if (sticky.e.style.position == 'fixed') {
+		updateElementPositions(sticky);
+		if (posShim.top >= posElement.top) {
+		    makeUnSticky(sticky);
+		    return;
+		}
+		if (posParent.bottom >= sticky.position) {
+		    sticky.e.style.top    = sticky.position + 'px';
+		    sticky.e.style.zIndex = '10000';
+		}	   
+		if (posParent.bottom <= sticky.position + posElement.height) {
+		    var newPosition = posParent.bottom - posElement.height;
+		    if (posElement.bottom <= 0) {
+			if (posParent.bottom >= posElement.top) {
+			    sticky.e.style.top    = newPosition + 'px';
+			    sticky.e.style.zIndex = null;
 			}
 			
-			if (posParent.bottom <= position + elementHeight) {
-				// happens when the sticky element has reached its parent's 
-				// bottom position, sticky element will now appear it's being carried
-				var newPosition = posParent.bottom - elementHeight;
-
-				if (posElement.bottom <= 0) {
-					// stops the element from updating it's position, for optimization
-					if (posParent.bottom >= posElement.top) {
-						// condition happens when scrolling down and sticky element
-						// will be coming into the viewport	
-						element.style.top    = newPosition + 'px';
-						element.style.zIndex = null;						
-					}
-					
-					return;
-				}
-
-				element.style.top    = newPosition + 'px';
-				element.style.zIndex = null;				
-			}
+			return;
+		    }
+		    sticky.e.style.top    = newPosition + 'px';
+		    sticky.e.style.zIndex = null;				
 		}
+	    }
 	});
+	
+	    
+    };
 
-	setSticky();
-
-	window.addEventListener('scroll', setSticky, true);
-};
+    /* Main
+     *****************************/
+    // Why? Because i needed to define the methods above
+    //      first so i could then use them
+    if(autoStart)
+	this.startSticky();
+}

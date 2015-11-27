@@ -8,11 +8,14 @@
 	<script id="pure-sticky" src="pure-sticky.js" type="text/javascript" defer></script>
 
 	<script id="main">
+
 	window.addEventListener("DOMContentLoaded", function() {
-	    pureSticky('nav',0);
-	    pureSticky('#sticky-header-1', 52);
-	    pureSticky('#sticky-section h3', 70);
-	    pureSticky('#problem-sticky-1', 52);
+	    window.sticky = new PureSticky(true);
+	    sticky.add('nav',0);
+	    sticky.add('#sticky-header-1', 52);
+	    sticky.add('#sticky-section h3', 70);
+	    sticky.add('#problem-sticky-1', 52);
+	    //sticky.add('#test',0);
 	});
 	
 	// For those that are using jQuery
@@ -208,6 +211,9 @@
 		    <p>Make sure that the desired element doesn't have any margin on top. It won't be in the position where you expect it. Will look into fixing this.</p>
 
 		    <p>Etiam vel lectus luctus, porttitor massa non, malesuada urna. Etiam eu felis sit amet neque accumsan lobortis vel ac leo. Nullam faucibus ante nibh, sit amet iaculis augue interdum sit amet. Vivamus odio sem, rhoncus eu nisl vel, elementum maximus tellus. In ut nisi venenatis, laoreet nunc in, interdum lorem. Fusce at mi semper, interdum odio aliquam, varius lorem. Praesent sagittis nisl massa, in venenatis dui efficitur ac. Quisque ultrices faucibus dapibus. </p>
+		</section>
+
+		<section id="test" class="multiple classes to see output">
 		</section>
 		
 		<section class="container" style="margin-top:100px">
