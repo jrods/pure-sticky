@@ -50,11 +50,11 @@ function PureSticky(autoStart) { //fuck you chrome not having default params in 
     /* Public
      *****************************/    
     this.startSticky = function() {
-	return window.addEventListener('scroll', this.setSticky, false);
+	window.addEventListener('scroll', this.setSticky, false);
     };
     
     this.stopSticky = function() {
-	return window.removeEventListener('scroll', this.setSticky, false);
+	window.removeEventListener('scroll', this.setSticky, false);
     };
 
     this.getAllElements = function() {
